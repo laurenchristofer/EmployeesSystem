@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Employee"
         mc:Ignorable="d"
         Title="AddEmployee"
-        MaxWidth="500">
+        MaxWidth="500"
+        WindowStyle="SingleBorderWindow">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>

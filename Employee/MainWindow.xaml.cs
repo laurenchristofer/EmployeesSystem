@@ -328,7 +328,9 @@ namespace Employee
 
         private void Logout(object sender, RoutedEventArgs e)
         {
-            dgridEmployee.Items.Refresh();
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            this.Close();
         }
 
         private void tbx_search_TextChanged(object sender, TextChangedEventArgs e)

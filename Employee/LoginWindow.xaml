@@ -9,11 +9,56 @@
         WindowState="Maximized"
         WindowStyle="ThreeDBorderWindow"
         Background="LightBlue">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="15"></Setter>
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="15"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="BorderBrush" Value="Azure"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Orientation="Vertical"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Center">
+            <Image Source="http://mpm-parts.com/public/bundles/images/logo.png"
+                   Margin="0,0,0,10"></Image>
+            <TextBlock
+                HorizontalAlignment="Center"
+                Margin="0,0,0,10">Username</TextBlock>
+            <TextBox
+                Margin="0,0,0,10"></TextBox>
+            <TextBlock HorizontalAlignment="Center"
+                       Margin="0,0,0,10">Password</TextBlock>
+            <PasswordBox
+                Margin="0,0,0,10"></PasswordBox>
+            <Button
+                x:Name="LoginBtn"
+                Click="LoginBtn_Click"
+                >Login</Button>
+        </StackPanel>
     </Grid>
 </Window>
