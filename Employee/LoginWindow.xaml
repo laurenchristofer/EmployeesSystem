@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Employee"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="300" Width="300">
+        Title="MU MPM-Parts Data"
+        WindowState="Maximized"
+        WindowStyle="ThreeDBorderWindow"
+        Background="LightBlue">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Window>
