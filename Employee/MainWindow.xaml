@@ -1,0 +1,188 @@
+﻿<Window x:Class="Employee.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Employee"
+        mc:Ignorable="d"
+        Title="MU MPM-Parts Data"
+        WindowState="Maximized"
+        WindowStyle="ThreeDBorderWindow"
+        Background="LightBlue">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="BorderBrush" Value="Azure"/>
+        </Style>
+        
+    </Window.Resources>
+    <Grid Margin="10,12,10,8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid
+            Grid.Column="0"
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Column="0"
+                VerticalAlignment="Center">
+                Search Name
+            </Label>
+            <TextBox
+                Grid.Column="1"
+                Margin="10"
+                VerticalAlignment="Center"
+                Height="30"
+                x:Name="tbx_search"
+                TextChanged="tbx_search_TextChanged"
+                Text="{Binding ElementName=dgridEmployee, Path=Filter,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        </Grid>
+        <StackPanel
+            Orientation="Horizontal"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Right">
+            <Button 
+                Margin="5"
+                Width="100"
+                Height="30" 
+                Click="Add_Employee">New Employee</Button>
+            <Button 
+                Margin="5"
+                Width="100"
+                Height="30" 
+                Click="UpdateEmployee">Update Employee</Button>
+            <Button 
+                Margin="5"
+                Width="100"
+                Height="30" 
+                Click="ExportExcel">Save to Excel</Button>
+            <Button 
+                Margin="5"
+                Width="100"
+                Height="30" 
+                Click="Logout">Logout</Button>
+        </StackPanel>
+        <DataGrid
+            x:Name="dgridEmployee"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            CanUserResizeColumns="False"
+            CanUserResizeRows="False"
+            CanUserSortColumns="True"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="False"
+            AutoGenerateColumns="False"
+            SelectedItem="{Binding Path=SelectedEmployee}"
+            FrozenColumnCount="2"
+            
+            >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="NIK" Width="70" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=NIK,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Name" Width="160" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Supervisor" Width="160" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Supervisor,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Depo" Width="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Depo,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Branch" Width="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Branch,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Employee Type" Width="122" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Employee_type,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Category" Width="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Category,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Join Date" Width="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePickerTextBox Text="{Binding Path=Join_date,Mode=TwoWay}"
+                                        IsReadOnly="True"
+                                        ></DatePickerTextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Status" Width="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Status,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Resign Date" Width="100" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Resign_date,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Reason" Width="100" CanUserSort="True" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Reason,Mode=TwoWay}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid
+            Grid.Row="0"
+            Grid.RowSpan="2">
+
+        </Grid>
+    </Grid>
+</Window>
