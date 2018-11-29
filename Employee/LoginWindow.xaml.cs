@@ -26,10 +26,19 @@ namespace Employee
         
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+            string user = tbx_username.Text;
+            string pwd = pbx_pwd.Password;
+            if (DBConnect.authentication(user, pwd) == 1)
+            {
+                this.Close();
+            }
+            else
+            {
+                tbx_username.Text = null;
+                pbx_pwd.Password = null;
+            }
             
-            MainWindow main = new MainWindow();
-            main.Show();
-            this.Close();
+            
         }
     }
 }

@@ -11,12 +11,6 @@ namespace Employee
 {
     class DBConnect
     {
-        /*private static String connectionString = @"Server=mpm-parts.com;
-                                                   Port=3306;
-                                                   Database=mpmparts_employees;
-                                                   Uid=mpmparts_hrd;
-                                                   Pwd=mpmpartsHRD#2018";*/
-       
         private static String connectionString = @"Server=localhost;
                                                    Port=3306;
                                                    Database=karyawanmpm;
@@ -122,7 +116,7 @@ namespace Employee
             try
             {
                 connect();
-                string query = "SELECT id,nik,name,supervisor,depo,branch,employee_type,category,join_date,status,resign_date,reason FROM employee";
+                string query = "SELECT id,nik,name,supervisor,depo,branch,employee_type,category,join_date,status,resign_date,reason FROM employee WHERE employee_type LIKE 'MU%' OR employee_type LIKE 'DSS%' ORDER BY nik";
 
                 MySqlCommand command = new MySqlCommand(query, conn);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -152,6 +146,142 @@ namespace Employee
                 disconnect();
             }
             return null;
+        }
+
+        //MU
+        public static ObservableCollection<EmployeeMPM> MUEmployee()
+        {
+            ObservableCollection<EmployeeMPM> EmployeeList = new ObservableCollection<EmployeeMPM>();
+            try
+            {
+                connect();
+                string query = "SELECT id,nik,name,supervisor,depo,branch,employee_type,category,join_date,status,resign_date,reason FROM employee WHERE employee_type LIKE 'MU%' ORDER BY nik ASC";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    EmployeeMPM employee = new EmployeeMPM();
+                    employee.Id = reader.GetInt32(0);
+                    employee.NIK = reader.GetString(1);
+                    employee.Name = reader.GetString(2);
+                    employee.Supervisor = reader.GetString(3);
+                    employee.Depo = reader.GetString(4);
+                    employee.Branch = reader.GetString(5);
+                    employee.Employee_type = reader.GetString(6);
+                    employee.Category = reader.GetString(7);
+                    employee.Join_date = reader.GetString(8);
+                    employee.Status = reader.GetString(9);
+                    employee.Resign_date = reader.GetString(10);
+                    employee.Reason = reader.GetString(11);
+                    EmployeeList.Add(employee);
+                }
+                disconnect();
+                return EmployeeList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                disconnect();
+            }
+            return null;
+        }
+
+        //DSS
+        public static ObservableCollection<EmployeeMPM> DSSEmployee()
+        {
+            ObservableCollection<EmployeeMPM> EmployeeList = new ObservableCollection<EmployeeMPM>();
+            try
+            {
+                connect();
+                string query = "SELECT id,nik,name,supervisor,depo,branch,employee_type,category,join_date,status,resign_date,reason FROM employee WHERE employee_type LIKE 'DSS%' ORDER BY nik ASC";
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    EmployeeMPM employee = new EmployeeMPM();
+                    employee.Id = reader.GetInt32(0);
+                    employee.NIK = reader.GetString(1);
+                    employee.Name = reader.GetString(2);
+                    employee.Supervisor = reader.GetString(3);
+                    employee.Depo = reader.GetString(4);
+                    employee.Branch = reader.GetString(5);
+                    employee.Employee_type = reader.GetString(6);
+                    employee.Category = reader.GetString(7);
+                    employee.Join_date = reader.GetString(8);
+                    employee.Status = reader.GetString(9);
+                    employee.Resign_date = reader.GetString(10);
+                    employee.Reason = reader.GetString(11);
+                    EmployeeList.Add(employee);
+                }
+                disconnect();
+                return EmployeeList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                disconnect();
+            }
+            return null;
+        }
+
+        public static string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
+        }
+
+        public static int authentication(string _username, string _password)
+        {
+            int count;
+            try
+            {
+                string username = _username.ToString();
+                string pass = CreateMD5(_password.ToString()).ToLower();
+                connect();
+
+                string authQuery = "SELECT COUNT(1) FROM `hr_user` WHERE username = '" + username + "' AND password = '" + pass + "'";
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = authQuery;
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", pass);
+                cmd.Connection = conn;
+                count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count == 1)
+                {
+                    MainWindow main = new MainWindow();
+                    LoginWindow login = new LoginWindow();
+                    main.Show();
+                    login.Close();
+                    //MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect username or password");
+                }
+                disconnect();
+                return count;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                disconnect();
+            }
+            return 0;
         }
 
     }

@@ -18,6 +18,7 @@
         </Style>
         
     </Window.Resources>
+    
     <Grid Margin="10,12,10,8">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -29,6 +30,20 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalAlignment="Center">
+            <CheckBox
+                x:Name="chbMU"
+                Checked="chbMU_Checked"
+                Unchecked="chbMU_Unchecked">MU</CheckBox>
+            <CheckBox
+                x:Name="chbDSS"
+                Checked="chbDSS_Checked"
+                Unchecked="chbDSS_Unchecked">DSS</CheckBox>
+        </StackPanel>
         <Grid
             Grid.Column="0"
             Grid.Row="1">
@@ -55,7 +70,7 @@
         </Grid>
         <StackPanel
             Orientation="Horizontal"
-            Grid.Row="1"
+            Grid.Row="0"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Right">
@@ -85,68 +100,75 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Grid.Row="2"
-            CanUserResizeColumns="False"
-            CanUserResizeRows="False"
             CanUserSortColumns="True"
-            CanUserAddRows="False"
             CanUserDeleteRows="False"
-            CanUserReorderColumns="False"
             AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeRows="False"
+            CanUserResizeColumns="False"
             SelectedItem="{Binding Path=SelectedEmployee}"
             FrozenColumnCount="2"
-            
             >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="NIK" Width="70" CanUserSort="True">
+                <DataGridTemplateColumn Header="NIK" Width="70" CanUserSort="True"
+                                        SortMemberPath="NIK">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=NIK,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Name" Width="160" CanUserSort="True">
+                <DataGridTemplateColumn Header="Name" Width="160" CanUserSort="True"
+                                        SortMemberPath="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name,Mode=TwoWay}"></TextBlock>
+                            <TextBlock Text="{Binding Path=Name,Mode=TwoWay}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Supervisor" Width="160" CanUserSort="True">
+                <DataGridTemplateColumn Header="Supervisor" Width="160" CanUserSort="True"
+                                        SortMemberPath="Supervisor">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Supervisor,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Depo" Width="100" CanUserSort="True">
+                <DataGridTemplateColumn Header="Depo" Width="100" CanUserSort="True"
+                                        SortMemberPath="Depo">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Depo,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Branch" Width="100" CanUserSort="True">
+                <DataGridTemplateColumn Header="Branch" Width="100" CanUserSort="True"
+                                        SortMemberPath="Branch">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Branch,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Employee Type" Width="122" CanUserSort="True">
+                <DataGridTemplateColumn Header="Employee Type" Width="122" CanUserSort="True"
+                                        SortMemberPath="Employee_type">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Employee_type,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Category" Width="100" CanUserSort="True">
+                <DataGridTemplateColumn Header="Category" Width="100" CanUserSort="True"
+                                        SortMemberPath="Category">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Category,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Join Date" Width="100" CanUserSort="True">
+                <DataGridTemplateColumn Header="Join Date" Width="100" CanUserSort="True"
+                                        SortMemberPath="Join_date">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePickerTextBox Text="{Binding Path=Join_date,Mode=TwoWay}"
@@ -155,21 +177,24 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Status" Width="100" CanUserSort="True">
+                <DataGridTemplateColumn Header="Status" Width="100" CanUserSort="True"
+                                        SortMemberPath="Status">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Status,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Resign Date" Width="100" CanUserSort="True">
+                <DataGridTemplateColumn Header="Resign Date" Width="100" CanUserSort="True"
+                                        SortMemberPath="Resign_date">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Resign_date,Mode=TwoWay}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Reason" Width="100" CanUserSort="True" >
+                <DataGridTemplateColumn Header="Reason" Width="100" CanUserSort="True"
+                                        SortMemberPath="Reason">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Reason,Mode=TwoWay}"></TextBlock>

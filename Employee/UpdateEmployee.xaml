@@ -143,6 +143,7 @@
                 <ComboBoxItem>VOLUNTARY</ComboBoxItem>
                 <ComboBoxItem>INVOLUNTARY</ComboBoxItem>
                 <ComboBoxItem>PROMOTION</ComboBoxItem>
+                <ComboBoxItem>MUTATION</ComboBoxItem>
             </ComboBox.Items>
         </ComboBox>
         <StackPanel

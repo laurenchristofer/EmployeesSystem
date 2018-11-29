@@ -30,15 +30,12 @@ namespace Employee
     {
         public EmployeeData employeeData = new EmployeeData();
         
-        
         public MainWindow()
         {
             InitializeComponent();
-
-            employeeData.fetchData(DBConnect.getEmployee());
             DataContext = employeeData;
-            dgridEmployee.ItemsSource = employeeData.Employees;
-            
+            chbMU.IsChecked = true;
+            chbDSS.IsChecked = true;
         }
 
         public class ExportToExcel<T, U>
@@ -322,8 +319,7 @@ namespace Employee
             AddEmployee addWindow = new AddEmployee();
             addWindow.ShowDialog();
             employeeData = new EmployeeData();
-            employeeData.fetchData(DBConnect.getEmployee());
-            DataContext = employeeData;
+            showEmployee();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
@@ -348,6 +344,48 @@ namespace Employee
 
             dgridEmployee.ItemsSource = Itemlist;
         }
+
+        private void chbMU_Checked(object sender, RoutedEventArgs e)
+        {
+            showEmployee();
+        }
+
+        private void chbDSS_Checked(object sender, RoutedEventArgs e)
+        {
+            showEmployee();
+        }
+
+        private void showEmployee()
+        {
+            if (chbMU.IsChecked == true && chbDSS.IsChecked == true)
+            {
+                employeeData.fetchData(DBConnect.getEmployee());
+                dgridEmployee.ItemsSource = employeeData.Employees;
+            }
+            else if (chbMU.IsChecked == true && chbDSS.IsChecked == false)
+            {
+                employeeData.fetchData(DBConnect.MUEmployee());
+                dgridEmployee.ItemsSource = employeeData.Employees;
+            }
+            else if (chbMU.IsChecked == false && chbDSS.IsChecked == true)
+            {
+                employeeData.fetchData(DBConnect.DSSEmployee());
+                dgridEmployee.ItemsSource = employeeData.Employees;
+            }
+            else
+            {
+                dgridEmployee.ItemsSource = null;
+            }
+        }
+
+        private void chbDSS_Unchecked(object sender, RoutedEventArgs e)
+        {
+            showEmployee();
+        }
+
+        private void chbMU_Unchecked(object sender, RoutedEventArgs e)
+        {
+            showEmployee();
+        }
     }
-    
 }

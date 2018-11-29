@@ -50,11 +50,13 @@
                 HorizontalAlignment="Center"
                 Margin="0,0,0,10">Username</TextBlock>
             <TextBox
-                Margin="0,0,0,10"></TextBox>
+                Margin="0,0,0,10"
+                x:Name="tbx_username"></TextBox>
             <TextBlock HorizontalAlignment="Center"
                        Margin="0,0,0,10">Password</TextBlock>
             <PasswordBox
-                Margin="0,0,0,10"></PasswordBox>
+                Margin="0,0,0,10"
+                x:Name="pbx_pwd"></PasswordBox>
             <Button
                 x:Name="LoginBtn"
                 Click="LoginBtn_Click"
